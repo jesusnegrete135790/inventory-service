@@ -1,0 +1,28 @@
+services:
+  db-inventory-service:
+    image: postgres:15-alpine
+    container_name: postgres-inventory-db
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_inventory_data:/var/lib/postgresql/data
+
+  inventory-service:
+    build: .
+    container_name: inventory-service
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-inventory-service:5432/${DB_NAME}
+      - SPRING_DATASOURCE_USERNAME=${DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASS}
+
+    depends_on:
+      - db-inventory-service
+
+volumes:
+  postgres_inventory_data:
