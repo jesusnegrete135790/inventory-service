@@ -3,6 +3,7 @@ package com.jesusn.booking.inventory_service.services.impl;
 import com.jesusn.booking.inventory_service.dtos.request.VenueRequestDTO;
 import com.jesusn.booking.inventory_service.dtos.response.VenueResponseDTO;
 import com.jesusn.booking.inventory_service.entities.Venue;
+import com.jesusn.booking.inventory_service.exceptions.ResourceNotFoundException;
 import com.jesusn.booking.inventory_service.mappers.VenueMapper;
 import com.jesusn.booking.inventory_service.repositories.VenueRepository;
 import com.jesusn.booking.inventory_service.services.VenueService;
@@ -46,7 +47,7 @@ public class VenueServiceImpl implements VenueService {
     @Transactional(readOnly = true)
     public VenueResponseDTO getVenueById(Integer id) {
         Venue venue = venueRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Venue not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Venue not found with id: " + id));
         return venueMapper.toDto(venue);
     }
 
@@ -55,7 +56,7 @@ public class VenueServiceImpl implements VenueService {
     public VenueResponseDTO updateVenue(Integer id, VenueRequestDTO requestDTO) {
 
         Venue existingVenue = venueRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Venue not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Venue not found with id: " + id));
 
         existingVenue.setName(requestDTO.name());
         existingVenue.setCity(requestDTO.city());
@@ -70,7 +71,7 @@ public class VenueServiceImpl implements VenueService {
     public void deleteVenue(Integer id) {
 
         Venue existingVenue = venueRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Venue not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Venue not found with id: " + id));
 
         venueRepository.delete(existingVenue);
     }

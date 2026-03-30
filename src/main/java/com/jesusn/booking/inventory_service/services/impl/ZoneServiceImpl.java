@@ -4,6 +4,7 @@ import com.jesusn.booking.inventory_service.dtos.request.ZoneRequestDTO;
 import com.jesusn.booking.inventory_service.dtos.response.ZoneResponseDTO;
 import com.jesusn.booking.inventory_service.entities.Venue;
 import com.jesusn.booking.inventory_service.entities.Zone;
+import com.jesusn.booking.inventory_service.exceptions.ResourceNotFoundException;
 import com.jesusn.booking.inventory_service.mappers.ZoneMapper;
 import com.jesusn.booking.inventory_service.repositories.VenueRepository;
 import com.jesusn.booking.inventory_service.repositories.ZoneRepository;
@@ -27,7 +28,7 @@ public class ZoneServiceImpl implements ZoneService {
     public ZoneResponseDTO createZone(ZoneRequestDTO requestDTO) {
 
         Venue venue = venueRepository.findById(requestDTO.venueId())
-                .orElseThrow(() -> new RuntimeException("Venue not found with id: " + requestDTO.venueId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Venue not found with id: " + requestDTO.venueId()));
 
         Zone zoneToSave = zoneMapper.toEntity(requestDTO);
 
