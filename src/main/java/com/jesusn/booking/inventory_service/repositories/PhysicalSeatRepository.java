@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface PhysicalSeatRepository extends JpaRepository<PhysicalSeat,Integer> {
     List<PhysicalSeat> findByZoneId(Integer zoneId);
+    List<PhysicalSeat> findByZoneVenueId(Integer venueId);
 }

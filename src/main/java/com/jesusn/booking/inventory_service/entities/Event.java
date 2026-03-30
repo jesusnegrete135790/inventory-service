@@ -25,6 +25,7 @@ public class Event {
     @JoinColumn(name ="venue_id" ,referencedColumnName = "id",nullable = true)
     private Venue venue;
 
+
     public Event() {
     }
 
