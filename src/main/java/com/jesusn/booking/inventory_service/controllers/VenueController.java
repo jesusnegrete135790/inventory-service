@@ -29,4 +29,23 @@ public class VenueController {
         List<VenueResponseDTO> responses = venueService.getAllVenues();
         return ResponseEntity.ok(responses);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<VenueResponseDTO> getVenueById(@PathVariable Integer id) {
+        VenueResponseDTO response = venueService.getVenueById(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<VenueResponseDTO> updateVenue(@PathVariable Integer id,
+                                                        @Valid @RequestBody VenueRequestDTO requestDTO) {
+        VenueResponseDTO response = venueService.updateVenue(id, requestDTO);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteVenue(@PathVariable Integer id) {
+        venueService.deleteVenue(id);
+        return ResponseEntity.noContent().build();
+    }
 }

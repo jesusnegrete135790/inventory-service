@@ -10,4 +10,7 @@ public interface VenueService {
     VenueResponseDTO createVenue(VenueRequestDTO requestDTO);
     List<VenueResponseDTO> getAllVenues();
 
+    VenueResponseDTO getVenueById(Integer id);
+    VenueResponseDTO updateVenue(Integer id, VenueRequestDTO requestDTO);
+    void deleteVenue(Integer id);
 }

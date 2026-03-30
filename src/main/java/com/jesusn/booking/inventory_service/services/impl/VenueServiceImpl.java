@@ -41,4 +41,37 @@ public class VenueServiceImpl implements VenueService {
 
         return venueMapper.toDtoList(venues);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public VenueResponseDTO getVenueById(Integer id) {
+        Venue venue = venueRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venue not found with id: " + id));
+        return venueMapper.toDto(venue);
+    }
+
+    @Override
+    @Transactional
+    public VenueResponseDTO updateVenue(Integer id, VenueRequestDTO requestDTO) {
+
+        Venue existingVenue = venueRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venue not found with id: " + id));
+
+        existingVenue.setName(requestDTO.name());
+        existingVenue.setCity(requestDTO.city());
+        existingVenue.setAddress(requestDTO.address());
+
+        Venue updatedVenue = venueRepository.save(existingVenue);
+        return venueMapper.toDto(updatedVenue);
+    }
+
+    @Override
+    @Transactional
+    public void deleteVenue(Integer id) {
+
+        Venue existingVenue = venueRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venue not found with id: " + id));
+
+        venueRepository.delete(existingVenue);
+    }
 }
