@@ -13,18 +13,18 @@ public class PhysicalSeat {
     private Integer seatNumber;
     private String rowLetter;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name ="zone_id" ,referencedColumnName = "id",nullable = true)
-    private Integer zoneId;
+    private Zone zone;
 
     public PhysicalSeat() {
     }
 
-    public PhysicalSeat(Integer id, Integer seatNumber, String rowLetter, Integer zoneId) {
+    public PhysicalSeat(Integer id, Integer seatNumber, String rowLetter, Zone zone) {
         this.id = id;
         this.seatNumber = seatNumber;
         this.rowLetter = rowLetter;
-        this.zoneId = zoneId;
+        this.zone = zone;
     }
 
     public Integer getId() {
@@ -51,11 +51,11 @@ public class PhysicalSeat {
         this.rowLetter = rowLetter;
     }
 
-    public Integer getZoneId() {
-        return zoneId;
+    public Zone getZone() {
+        return zone;
     }
 
-    public void setZoneId(Integer zoneId) {
-        this.zoneId = zoneId;
+    public void setZone(Zone zone) {
+        this.zone = zone;
     }
 }

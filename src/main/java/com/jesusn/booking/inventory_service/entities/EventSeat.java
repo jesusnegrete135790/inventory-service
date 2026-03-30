@@ -17,24 +17,24 @@ public class EventSeat {
 
     private String status;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name ="event_id" ,referencedColumnName = "id",nullable = true)
-    private Integer eventId;
+    private Event event;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name ="physical_seat_id" ,referencedColumnName = "id",nullable = true)
-    private Integer physicalSeatId;
+    private PhysicalSeat physicalSeat;
 
     public EventSeat() {
     }
 
-    public EventSeat(Integer id, Integer version, BigDecimal price, String status, Integer eventId, Integer physicalSeatId) {
+    public EventSeat(Integer id, Integer version, BigDecimal price, String status, Event event, PhysicalSeat physicalSeat) {
         this.id = id;
         this.version = version;
         this.price = price;
         this.status = status;
-        this.eventId = eventId;
-        this.physicalSeatId = physicalSeatId;
+        this.event = event;
+        this.physicalSeat = physicalSeat;
     }
 
     public Integer getId() {
@@ -69,19 +69,19 @@ public class EventSeat {
         this.status = status;
     }
 
-    public Integer getEventId() {
-        return eventId;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setEventId(Integer eventId) {
-        this.eventId = eventId;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
-    public Integer getPhysicalSeatId() {
-        return physicalSeatId;
+    public PhysicalSeat getPhysicalSeat() {
+        return physicalSeat;
     }
 
-    public void setPhysicalSeatId(Integer physicalSeatId) {
-        this.physicalSeatId = physicalSeatId;
+    public void setPhysicalSeat(PhysicalSeat physicalSeat) {
+        this.physicalSeat = physicalSeat;
     }
 }

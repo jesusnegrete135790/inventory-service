@@ -13,18 +13,18 @@ public class Zone {
     private Integer capacity;
     private String name;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name ="venue_id" ,referencedColumnName = "id",nullable = true)
-    private Integer venueId;
+    private Venue venue;
 
     public Zone() {
     }
 
-    public Zone(Integer id, Integer capacity, String name, Integer venueId) {
+    public Zone(Integer id, Integer capacity, String name, Venue venue) {
         this.id = id;
         this.capacity = capacity;
         this.name = name;
-        this.venueId = venueId;
+        this.venue = venue;
     }
 
     public Integer getId() {
@@ -51,11 +51,11 @@ public class Zone {
         this.name = name;
     }
 
-    public Integer getVenueId() {
-        return venueId;
+    public Venue getVenue() {
+        return venue;
     }
 
-    public void setVenueId(Integer venueId) {
-        this.venueId = venueId;
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 }

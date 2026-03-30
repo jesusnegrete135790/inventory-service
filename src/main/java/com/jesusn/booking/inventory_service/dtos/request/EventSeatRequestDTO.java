@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 public record EventSeatRequestDTO (
         @NotNull
-        Integer version, //BLOQUEO OPTIMISTA PARA CONCURRENCIA
+        Integer version,
 
         @NotNull
         @Positive

@@ -1,6 +1,9 @@
 package com.jesusn.booking.inventory_service.entities;
 
+
 import jakarta.persistence.*;
+
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,20 +21,20 @@ public class Event {
     private LocalDateTime createdAt;
 
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name ="venue_id" ,referencedColumnName = "id",nullable = true)
-    private Integer venueId;
+    private Venue venue;
 
     public Event() {
     }
 
-    public Event(Integer id, String title, String status, LocalDateTime eventDate, LocalDateTime createdAt, Integer venueId) {
+    public Event(Integer id, String title, String status, LocalDateTime eventDate, LocalDateTime createdAt, Venue venue) {
         this.id = id;
         this.title = title;
         this.status = status;
         this.eventDate = eventDate;
         this.createdAt = createdAt;
-        this.venueId = venueId;
+        this.venue = venue;
     }
 
     public Integer getId() {
@@ -74,11 +77,11 @@ public class Event {
         this.createdAt = createdAt;
     }
 
-    public Integer getVenueId() {
-        return venueId;
+    public Venue getVenue() {
+        return venue;
     }
 
-    public void setVenueId(Integer venueId) {
-        this.venueId = venueId;
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 }

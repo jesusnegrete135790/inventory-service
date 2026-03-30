@@ -1,4 +1,7 @@
 package com.jesusn.booking.inventory_service.repositories;
 
-public interface EventRepository {
+import com.jesusn.booking.inventory_service.entities.Event;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EventRepository extends JpaRepository<Event,Integer> {
 }
