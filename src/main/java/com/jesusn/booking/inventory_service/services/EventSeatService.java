@@ -7,6 +7,7 @@ import java.util.List;
 public interface EventSeatService {
 
     List<EventSeatResponseDTO> getSeatsByEventId(Integer eventId);
+    EventSeatResponseDTO getSeatById(Integer eventId);
 
     EventSeatResponseDTO lockSeat(Integer seatId);
 

@@ -41,6 +41,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleGlobalException(Exception ex, WebRequest request) {
+        ex.printStackTrace();
         ErrorResponseDTO errorResponse = new ErrorResponseDTO(
                 "An unexpected error occurred",
                 request.getDescription(false),

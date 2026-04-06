@@ -31,6 +31,13 @@ public class EventSeatServiceImpl implements EventSeatService {
     }
 
     @Override
+    public EventSeatResponseDTO getSeatById(Integer eventId) {
+        EventSeat seat = eventSeatRepository.findById(eventId)
+                .orElseThrow(() -> new ResourceNotFoundException("Event Seat not found with id: " + eventId));
+        return eventSeatMapper.toDto(seat);
+    }
+
+    @Override
     @Transactional
     public EventSeatResponseDTO lockSeat(Integer seatId) {
         EventSeat seat = eventSeatRepository.findById(seatId)
