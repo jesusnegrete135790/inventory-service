@@ -11,4 +11,5 @@ public interface EventSeatService {
 
     EventSeatResponseDTO lockSeat(Integer seatId);
 
+
 }

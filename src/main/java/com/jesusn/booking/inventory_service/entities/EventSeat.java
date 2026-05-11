@@ -1,8 +1,13 @@
 package com.jesusn.booking.inventory_service.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "event_seats")
@@ -16,6 +21,8 @@ public class EventSeat {
     private BigDecimal price;
 
     private String status;
+    @Column(name = "locked_at")
+    private LocalDateTime lockedAt;
 
     @ManyToOne
     @JoinColumn(name ="event_id" ,referencedColumnName = "id",nullable = true)
@@ -28,11 +35,12 @@ public class EventSeat {
     public EventSeat() {
     }
 
-    public EventSeat(Integer id, Integer version, BigDecimal price, String status, Event event, PhysicalSeat physicalSeat) {
+    public EventSeat(Integer id, Integer version, BigDecimal price, String status, LocalDateTime lockedAt, Event event, PhysicalSeat physicalSeat) {
         this.id = id;
         this.version = version;
         this.price = price;
         this.status = status;
+        this.lockedAt = lockedAt;
         this.event = event;
         this.physicalSeat = physicalSeat;
     }
@@ -67,6 +75,14 @@ public class EventSeat {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDateTime getLockedAt() {
+        return lockedAt;
+    }
+
+    public void setLockedAt(LocalDateTime lockedAt) {
+        this.lockedAt = lockedAt;
     }
 
     public Event getEvent() {
